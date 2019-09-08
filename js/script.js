@@ -74,23 +74,28 @@ function generateTitleLinks(){
     console.log(optArticleSelector);
         for (let article of articles) {
 
- //           XXXXXXXXXXXXX
+ // Gdzie zamknac ta klamre?
 
-    /* [IN PROGRESS] get the article id */
+    /* [DONE] get the article id */
 
     const articleId = article.getAttribute('id');
-        console.log(articleId);
+        console.log('article id:', articleId);
 
-    /* find the title element */
+    /* [DONE] find the title element */
 
     const articleTitle = article.querySelector(optTitleSelector).innerHTML;
 
-    /* get the title from the title element */
+    /* [DONE] get the title from the title element & create HTML of the link */
 
-    /* create HTML of the link */
+    const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+    console.log('link html:', linkHTML);
 
-    /* insert link into titleList */
-        }
+    /* [DONE] insert link into titleList */
+
+    document.querySelector('.titles').insertAdjacentHTML('beforeend', linkHTML);
+        
+
+}
 }
 
 generateTitleLinks();
