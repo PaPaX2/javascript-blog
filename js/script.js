@@ -56,47 +56,88 @@
         link.addEventListener('click', titleClickHandler);
     }
 
-    //SECOND PART OF MODULE 6
+    //SECOND PART OF MODULE 6 | 1st way
 
+    /*
+    const optArticleSelector = '.post',
+    optTitleSelector = '.post-title',
+    optTitleListSelector = '.titles';
+    
+    function generateTitleLinks(){
+    
+      // [DONE] remove contents of titleList
+        const titleList = document.querySelector(optTitleListSelector).innerHTML = '';
+    
+      // [DONE] for each article
+    
+        const articles = document.querySelectorAll(optArticleSelector);
+        console.log(optArticleSelector);
+            for (let article of articles) {
+    
+     // Gdzie zamknac ta klamre?
+    
+        //[DONE] get the article id
+    
+        const articleId = article.getAttribute('id');
+            console.log('article id:', articleId);
+    
+        // [DONE] find the title element
+    
+        const articleTitle = article.querySelector(optTitleSelector).innerHTML;
+    
+        // [DONE] get the title from the title element & create HTML of the link
+    
+        const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+        console.log('link html:', linkHTML);
+    
+        document.querySelector('.titles').insertAdjacentHTML('beforeend', linkHTML);
+          
+    }
+    }
+    
+    generateTitleLinks();
+    */
 
-const optArticleSelector = '.post',
-optTitleSelector = '.post-title',
-optTitleListSelector = '.titles';
+    //SECOND PART OF MODULE 6 | 2nd way
 
-function generateTitleLinks(){
+    const optArticleSelector = '.post',
+        optTitleSelector = '.post-title',
+        optTitleListSelector = '.titles';
 
-  /* [DONE] remove contents of titleList */
-    const titleList = document.querySelector(optTitleListSelector).innerHTML = '';
+    function generateTitleLinks() {
+        /* remove contents of titleList */
+        const titleList = document.querySelector(optTitleListSelector).innerHTML = '';
 
-  /* [DONE] for each article */
+        /* find all the articles and save them to variable: articles */
+        let articles = document.querySelectorAll(optArticleSelector);
+        //console.log('artykuły:', articles);
 
-    const articles = document.querySelectorAll(optArticleSelector);
-    console.log(optArticleSelector);
+        let html = '';
+
         for (let article of articles) {
+            /* get the article id */
+            const articleId = article.getAttribute('id');
+            //   console.log('article id:', articleId);
 
- // Gdzie zamknac ta klamre?
+            /* find the title element */
+            const articleTitle = article.querySelector(optTitleSelector).innerHTML;
+            //console.log('tytuł arykułu:', articleTitle);
 
-    /* [DONE] get the article id */
+            /* get the title from the title element */
+            /* ... */
 
-    const articleId = article.getAttribute('id');
-        console.log('article id:', articleId);
+            /* create HTML of the link */
+            const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+            //console.log('link html:', linkHTML);
 
-    /* [DONE] find the title element */
+            /* insert link into html variable */
+            html = html + linkHTML;
+            console.log(html);
+        }
 
-    const articleTitle = article.querySelector(optTitleSelector).innerHTML;
+        titleList.innerHTML = html;
+    }
 
-    /* [DONE] get the title from the title element & create HTML of the link */
-
-    const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
-    console.log('link html:', linkHTML);
-
-    /* [DONE] insert link into titleList */
-
-    document.querySelector('.titles').insertAdjacentHTML('beforeend', linkHTML);
-        
-
+    generateTitleLinks();
 }
-}
 
-generateTitleLinks();
-}
