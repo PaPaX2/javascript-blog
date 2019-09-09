@@ -50,15 +50,11 @@
         targetArticle.classList.add('active');
     }
 
-    const links = document.querySelectorAll('.titles a');
-
-    for (let link of links) {
-        link.addEventListener('click', titleClickHandler);
-    }
+    
 
     //SECOND PART OF MODULE 6 | 1st way
 
-    /*
+    
     const optArticleSelector = '.post',
     optTitleSelector = '.post-title',
     optTitleListSelector = '.titles';
@@ -91,53 +87,57 @@
         console.log('link html:', linkHTML);
     
         document.querySelector('.titles').insertAdjacentHTML('beforeend', linkHTML);
-          
-    }
+        }  
     }
     
     generateTitleLinks();
-    */
+    const links = document.querySelectorAll('.titles a');
+    console.log('stała links:', links)
 
-    //SECOND PART OF MODULE 6 | 2nd way
+    for (let link of links) {
+        link.addEventListener('click', titleClickHandler);
+    }
+
+    /* SECOND PART OF MODULE 6 | 2nd way
 
     const optArticleSelector = '.post',
         optTitleSelector = '.post-title',
         optTitleListSelector = '.titles';
 
     function generateTitleLinks() {
-        /* remove contents of titleList */
+        //remove contents of titleList
         const titleList = document.querySelector(optTitleListSelector).innerHTML = '';
-
-        /* find all the articles and save them to variable: articles */
+        
+        // find all the articles and save them to variable: articles
         let articles = document.querySelectorAll(optArticleSelector);
         //console.log('artykuły:', articles);
 
         let html = '';
 
         for (let article of articles) {
-            /* get the article id */
+            // get the article id
             const articleId = article.getAttribute('id');
             //   console.log('article id:', articleId);
 
-            /* find the title element */
+            // find the title element
             const articleTitle = article.querySelector(optTitleSelector).innerHTML;
             //console.log('tytuł arykułu:', articleTitle);
 
-            /* get the title from the title element */
-            /* ... */
-
-            /* create HTML of the link */
+            // get the title from the title element
+            
+            // create HTML of the link
             const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
             //console.log('link html:', linkHTML);
 
-            /* insert link into html variable */
+            // insert link into html variable
             html = html + linkHTML;
             console.log(html);
-        }
+            }
 
         titleList.innerHTML = html;
-    }
+        }
 
     generateTitleLinks();
+    */
 }
 
