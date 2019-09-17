@@ -10,11 +10,12 @@
     optTitleSelector = '.post-title',
     optTitleListSelector = '.titles',
     optArticleTagsSelector = '.post-tags .list',
-    optArticleTagSelector = '.post-tags a';
+    optArticleTagSelector = '.post-tags a',
+    optArticleAuthorSelector = '.post-author';
 
   const titleClickHandler = function (event) {
-    console.log('Link was clicked!');
-    console.log(event);
+    //console.log('Link was clicked!');
+    //console.log(event);
 
     // [DONE] remove class 'active' from all article links
 
@@ -110,7 +111,7 @@
 
     // find all the articles and save them to variable: articles
     let articles = document.querySelectorAll(optArticleSelector + customSelector);
-    // console.log('artykuły:', articles);
+    //console.log('artykuły:', articles);
 
     let html = '';
 
@@ -151,14 +152,14 @@
     /* find all articles */
 
     const articles = document.querySelectorAll(optArticleSelector);
-    // console.log(articles);
+    //console.log(articles);
 
     /* START LOOP: for every article: */
     for (let article of articles) {
 
       /* find tags wrapper */
       const tagList = article.querySelector(optArticleTagsSelector);
-      // console.log('stała tagList:', optArticleTagSelector);
+      //console.log('stała tagList:', optArticleTagSelector);
 
       /* make html variable with empty string */
 
@@ -181,7 +182,7 @@
 
         /* generate HTML of the link */
         const linkHtml = '<li><a href="#tag-' + tag + '">' + tag + '</a></li>';
-        // console.log(linkHtml);
+        //console.log('linkHtml: ', linkHtml);
         /* add generated code to html variable */
 
         html = html + linkHtml;
@@ -190,7 +191,7 @@
       }
       /* insert HTML of all the links into the tags wrapper */
       tagList.innerHTML = html;
-      console.log(html);
+      //console.log('html: ', html);
       /* END LOOP: for every article: */
     }
   }
@@ -260,6 +261,45 @@
   }
   addClickListenersToTags();
 
+  function generateAuthors() {
 
+    /* find all authors */
+
+    const authors = document.querySelectorAll(optArticleSelector);
+    //console.log('autorzy:', authors);
+
+    
+    /* START LOOP: for every author: */
+    for (let author of authors) {
+
+      /* find author wrapper */
+
+      const authorList = author.querySelector(optArticleAuthorSelector);
+      //console.log('lista autorów:', authorList);
+
+      /* make html variable with empty string */
+
+      let html = '';
+
+      /* get author from data-author attribute */
+
+      const articleAuthor = author.getAttribute('data-author');
+      console.log('autorzy: ', articleAuthor);
+
+      /* generate HTML of the link */
+      const linkHtml = '<li><a href="#author-' + articleAuthor + '">' + articleAuthor + '</a></li>';
+      //console.log(linkHtml);
+
+      /* add generated code to html variable */
+
+      html = html + linkHtml;
+
+      /* insert HTML of all the links into the author wrapper */
+      authorList.innerHTML = html;
+      //console.log(html);
+      /* END LOOP: for every article: */
+    }
+  }
+  generateAuthors();
 
 }
