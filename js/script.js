@@ -103,13 +103,13 @@
 
 
 
-  function generateTitleLinks() {
+  function generateTitleLinks(customSelector = '') {
   //remove contents of titleList
     const titleList = document.querySelector(optTitleListSelector);
     titleList.innerHTML = '';
 
     // find all the articles and save them to variable: articles
-    let articles = document.querySelectorAll(optArticleSelector);
+    let articles = document.querySelectorAll(optArticleSelector + customSelector);
     // console.log('artykuły:', articles);
 
     let html = '';
@@ -239,13 +239,6 @@
       /* END LOOP: for each found tag link */
     }
     /* execute function "generateTitleLinks" with article selector as argument */
-    //generateTitleLinks('[data-tags~="' + tag + '"]');
-        
-    function generateTitleLinks(customSelector = ''){
-      const articles = document.querySelectorAll(optArticleSelector + customSelector);
-      console.log('znajdź wszsystkie selektory: ', optArticleSelector + customSelector);
-      console.log('takie selektory znajdują się w: ', articles);
-    }
     generateTitleLinks('[data-tags~="' + tag + '"]');
     
   };
