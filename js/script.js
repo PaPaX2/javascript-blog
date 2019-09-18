@@ -150,8 +150,8 @@
 
   function generateTags() {
     
-    /* [NEW] create a new variable allTags with an empty array */
-    let allTags = [];
+    /* [NEW] create a new variable allTags with an empty object */
+    let allTags = {};
 
     /* find all articles */
     const articles = document.querySelectorAll(optArticleSelector);
@@ -176,7 +176,7 @@
       /* split tags into array */
 
       const articleTagsArray = articleTags.split(' ');
-      // console.log('tablica tagów:', articleTagsArray);
+      console.log('tablica tagów:', articleTagsArray);
 
       /* START LOOP: for each tag */
 
@@ -191,26 +191,38 @@
         html = html + linkHTML;
 
         /* [NEW] check if this link is NOT already in allTags */
-        if(allTags.indexOf(linkHTML) == -1){
-
-          /* [NEW] add generated code to allTags array */
-
-          allTags.push(linkHTML);
+        if(!allTags.hasOwnProperty(tag)) {
+          //NEW add tag to allTags object
+          allTags[tag] = 1;
+        } else {
+          allTags[tag]++;
         }
-
+      
         /* END LOOP: for each tag */
       }
       /* insert HTML of all the links into the tags wrapper */
       tagList.innerHTML = html;
       //console.log('html: ', html);
+      
       /* END LOOP: for every article: */
     }
     /* [NEW] find list of tags in right column */
     const tagList = document.querySelector('.tags');
-    console.log ('lista tagów: ', tagList);
+    
+    // [NEW] create variable for all links HTML code
+    let allTagsHTML = '';
+    
+    // [NEW] START LOOP: for each tag in allTags
+    for (let tag of allTags) {
+    
+      //[NEW] Generate code of a link and add it to allTagsHTML
+      allTagsHTML += tag + ' (' + allTags[tag] + ') ';
+      console.log('allTagsHTML: ', allTagsHTML);
+    // [NEW] END LOOP: for each tag i allTags
+    }
 
     /* [NEW] add html from allTags to tagList */
-    tagList.innerHTML = allTags.join(' ');
+    tagList.innerHTML = allTagsHTML;
     console.log('tablica tagów: ', allTags);
   }
 
