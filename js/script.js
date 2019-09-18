@@ -1,3 +1,4 @@
+/* eslint-disable no-prototype-builtins */
 'use strict';
 /* document.getElementById('test-button').addEventListener('click', function(){
   const links = document.querySelectorAll('.titles a');
@@ -12,7 +13,9 @@
     optArticleTagsSelector = '.post-tags .list',
     optArticleTagSelector = '.post-tags a',
     optArticleAuthorSelector = '.post-author',
-    optTagsListSelector = '.tags .list';
+    optTagsListSelector = '.tags .list',
+    optCloudClassCount = 5,
+    optCloudClassPrefix = 'tag-size-';
 
   const titleClickHandler = function (event) {
     //console.log('Link was clicked!');
@@ -148,6 +151,29 @@
     link.addEventListener('click', titleClickHandler);
   }
 
+  function calculateTagsParams(tags) {
+    
+    // [VERY NEW] create a new variable object params with max and min value
+    const params = {max: '0', min: '999999'};
+
+    // [VERY NEW] START LOOP for every tags
+    for (let tag in tags) {
+      console.log(tag + ' is used ' + tags[tag] + ' times');
+
+      // [VERY NEW] set value for params.max as tags[tag] only if the value is higher than current
+
+      params.max = Math.max(tags[tag], params.max);
+      params.min = Math.min(tags[tag], params.min);
+    }
+
+
+
+    return params;
+  }
+
+  calculateTagsParams();
+
+
   function generateTags() {
     
     /* [NEW] create a new variable allTags with an empty object */
@@ -176,7 +202,7 @@
       /* split tags into array */
 
       const articleTagsArray = articleTags.split(' ');
-      console.log('tablica tagów:', articleTagsArray);
+      //console.log('tablica tagów:', articleTagsArray);
 
       /* START LOOP: for each tag */
 
@@ -209,21 +235,25 @@
     /* [NEW] find list of tags in right column */
     const tagList = document.querySelector('.tags');
     
+    // [VERY NEW] counting number of occurences of allTags
+    const tagsParams = calculateTagsParams(allTags);
+    console.log('tagsParams: ', tagsParams);
+    
     // [NEW] create variable for all links HTML code
     let allTagsHTML = '';
     
     // [NEW] START LOOP: for each tag in allTags
-    for (let tag of allTags) {
+    for (let tag in allTags) {
     
       //[NEW] Generate code of a link and add it to allTagsHTML
-      allTagsHTML += tag + ' (' + allTags[tag] + ') ';
-      console.log('allTagsHTML: ', allTagsHTML);
+      allTagsHTML += '<li><a href="#tag-' + tag + '">' + tag + '</a>' + ' (' + allTags[tag] + ') </li>';
+      //console.log('allTagsHTML: ', allTagsHTML);
     // [NEW] END LOOP: for each tag i allTags
     }
 
     /* [NEW] add html from allTags to tagList */
     tagList.innerHTML = allTagsHTML;
-    console.log('tablica tagów: ', allTags);
+    //console.log('tablica tagów: ', allTags);
   }
 
   generateTags();
