@@ -86,6 +86,10 @@ body {
   margin-bottom: 12px;
 }
 
+.authors a {
+  margin-right: 10px;
+}
+
 /* Post */
 .post {
   display: none;
