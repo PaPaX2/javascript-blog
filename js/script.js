@@ -254,6 +254,7 @@
     
     // [NEW] START LOOP: for each tag in allTags
     for (let tag in allTags) {
+      //console.log('tag: ', tag, 'allTags: ', allTags);
     
       //[NEW] Generate code of a link and add it to allTagsHTML
       allTagsHTML += '<li><a class="' + calculateTagClass(allTags[tag], tagsParams) + '" href="#tag-' + tag + '">' + tag + '</a></li>';
@@ -343,10 +344,11 @@
     
     /* START LOOP: for every author: */
     for (let author of authors) {
+      //console.log('author: ', author);
 
       /* find author wrapper */
       const authorList = author.querySelector(optArticleAuthorSelector);
-      console.log('lista autorów:', authorList);
+      //console.log('lista autorów:', authorList);
 
       /* make html variable with empty string */
 
@@ -372,23 +374,25 @@
       } else {
         allAuthors[author]++;
       }
+
       /* insert HTML of all the links into the author wrapper */
       authorList.innerHTML = html;
-      console.log(html);
+      //console.log(html);
       /* END LOOP: for every article: */
     }
     //find authors in right column
-    const authorList = document.querySelector('.authors');
-    console.log('auhorList: ', authorList);
+    const authorList = document.querySelector('.list .authors');
+    //console.log('auhorList: ', authorList);
 
     //create variable for all links HTML code
     let allAuthorsHTML = '';
 
     //START LOOP: each author in authors
-    for (let author of authors) {
-
+    for (let author in allAuthors) {
+      console.log('allAuthors: ', allAuthors);
+      console.log(author);
       //Generate code of a link for allAuthorsHTML
-      allAuthorsHTML += '<li><a href="' + author + '">' + author + '</a></li>';
+      allAuthorsHTML += '<li><a href="' + author + '">' +  + '</a></li>';
     
     //END LOOP for each author
     }
