@@ -5,6 +5,7 @@ const templates = {
   tagLink: Handlebars.compile(document.querySelector('#template-tag-link').innerHTML),
   authorLink: Handlebars.compile(document.querySelector('#template-author-link').innerHTML),
   tagCloudLink: Handlebars.compile(document.querySelector('#template-tag-cloud-link').innerHTML),
+  authorCloudLink: Handlebars.compile(document.querySelector('#template-author-cloud-link').innerHTML),
 };
 {
   const
@@ -422,7 +423,11 @@ const templates = {
     //console.log('auhorList: ', authorList);
 
     //create variable for all links HTML code
-    let allAuthorsHTML = '';
+    //With Handlebars
+    //let allAuthorsHTML = '';
+
+    //Without Handlebars
+    const allAuthorsData = {authors: []};
 
     //START LOOP: each author in authors
     for (let author in allAuthors) {
@@ -430,13 +435,25 @@ const templates = {
       //console.log('author: ',author);
 
       //Generate code of a link for allAuthorsHTML
-      allAuthorsHTML += '<li><a href="#author-' + author + '">' + author + '</a>( ' + allAuthors[author] + ')</li>';
-    
+      //Without Handlebars
+      //allAuthorsHTML += '<li><a href="#author-' + author + '">' + author + '</a>( ' + allAuthors[author] + ')</li>';
+      
+      //With Handlebars
+      allAuthorsData.authors.push({
+        author: author,
+        count: allAuthors[author]
+      });
+
     //END LOOP for each author
     }
 
     //add html from allAuthorsHTML to authorList
-    authorList.innerHTML = allAuthorsHTML;
+    //Without Handlebars
+    //authorList.innerHTML = allAuthorsHTML;
+
+    //With Handlebars
+    authorList.innerHTML = templates.authorCloudLink(allAuthorsData);
+    console.log('tablica autorów: ', allAuthorsData);
   }
   generateAuthors();
 
